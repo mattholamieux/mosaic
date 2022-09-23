@@ -8,10 +8,9 @@ class Pixel {
         this.b = b;
         this.a = a;
         this.note = notes[floor(map(r, 0, 255, 0, notes.length - 1))];
-        this.modIndex = map(size, pixelSize, pixelSize * 5, 1, 80);
-        this.modAttack = map(g, 255, 0, 0.005, 0.5);
+        this.modIndex = map(g, 255, 0, 4, 40);
         this.harmonicity = harmonics[floor(map(b, 0, 255, 0, harmonics.length))];
-        this.susLength = map(g, 255, 0, 0.2, 0.8);
+        this.susLength = 0.1;
         this.mouseIntersect = false;
         this.autoIntersect = false;
         this.grow = 1;
@@ -35,7 +34,7 @@ class Pixel {
                 if (this.growSize === pixelSize * 5 || this.growSize === pixelSize) {
                     this.grow = this.grow * -1;
                 }
-                this.modIndex = map(this.growSize, pixelSize, pixelSize * 5, 1, 80);
+                this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
                 synth1.set({
                     modulationIndex: this.modIndex,
                     harmonicity: this.harmonicity,
@@ -59,7 +58,7 @@ class Pixel {
                 if (this.growSize === pixelSize * 5 || this.growSize === pixelSize) {
                     this.grow = this.grow * -1;
                 }
-                this.modIndex = map(this.growSize, pixelSize, pixelSize * 5, 1, 80);
+                this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
                 synth2.set({
                     modulationIndex: this.modIndex,
                     harmonicity: this.harmonicity,

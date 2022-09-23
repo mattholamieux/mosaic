@@ -1,9 +1,18 @@
+// Automation Track One 
 let t1Xs = [];
 let t1Ys = [];
 let t1autoX;
 let t1autoY;
 let t1index = 0;
 let t1Play = false;
+// Automation Track Two
+let t2Xs = [];
+let t2Ys = [];
+let t2autoX;
+let t2autoY;
+let t2index = 0;
+let t2Play = false;
+// Global variables
 let selectedTrack = 1;
 let isInitialized = false;
 let isLooping = true;
@@ -50,12 +59,16 @@ function draw() {
         pixel.show();
         pixel.mouseCross();
         pixel.autoCross();
+        pixel.autoCross2();
     }
 
     if (mouseIsPressed) {
         if (selectedTrack === 1) {
             t1Xs.push(mouseX);
             t1Ys.push(mouseY);
+        } else if (selectedTrack === 2) {
+            t2Xs.push(mouseX);
+            t2Ys.push(mouseY);
         }
     }
     if (t1Play) {
@@ -65,6 +78,15 @@ function draw() {
             t1index++;
         } else {
             t1index = 0;
+        }
+    }
+    if (t2Play) {
+        t2autoX = t2Xs[t2index];
+        t2autoY = t2Ys[t2index];
+        if (t2index < t2Xs.length - 1) {
+            t2index++;
+        } else {
+            t2index = 0;
         }
     }
 }
@@ -124,6 +146,12 @@ function startRecording() {
         console.log('recording track one');
         t1Xs = [];
         t1Yss = [];
+    } else if (selectedTrack === 2) {
+        t2Play = false;
+        t2index = 0;
+        console.log('recording track two');
+        t2Xs = [];
+        t2Yss = [];
     }
 }
 
@@ -131,6 +159,10 @@ function stopRecording() {
     if (selectedTrack === 1) {
         console.log('stop recording track one')
         t1Play = true;
+        selectedTrack = 2;
+    } else if (selectedTrack === 2) {
+        console.log('stop recording track two')
+        t2Play = true;
         selectedTrack = 0;
     }
 }

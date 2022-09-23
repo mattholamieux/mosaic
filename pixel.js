@@ -13,6 +13,7 @@ class Pixel {
         this.susLength = 0.1;
         this.mouseIntersect = false;
         this.autoIntersect = false;
+        this.autoIntersect2 = false;
         this.grow = 1;
         this.growSize = size;
     }
@@ -73,4 +74,28 @@ class Pixel {
             this.autoIntersect = false;
         }
     }
+    autoCross2() {
+        let d2 = dist(t2autoX, t2autoY, this.x, this.y);
+        if (d2 < this.size / 2) {
+            if (!this.autoIntersect2) {
+                this.growSize += pixelSize * this.grow;
+                if (this.growSize === pixelSize * 5 || this.growSize === pixelSize) {
+                    this.grow = this.grow * -1;
+                }
+                this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
+                synth3.set({
+                    modulationIndex: this.modIndex,
+                    harmonicity: this.harmonicity,
+                    modulationEnvelope: {
+                        attack: this.modAttack
+                    }
+                });
+                synth3.triggerAttackRelease(this.note, this.susLength);
+                this.autoIntersect2 = true;
+            }
+        } else {
+            this.autoIntersect2 = false;
+        }
+    }
+
 }

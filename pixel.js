@@ -9,7 +9,7 @@ class Pixel {
         this.a = a;
         this.note = notes[floor(map(r, 0, 255, 0, notes.length - 1))];
         this.filterAmt = floor(map(g, 0, 255, 1, 6));
-        this.filterEnv = map(b, 0, 255, 0.01, 0.5);
+        this.filterEnv = map(b, 0, 255, 0.01, 0.3);
         this.susLength = 0.1;
         this.mouseIntersect = false;
         this.autoIntersect = false;
@@ -32,10 +32,10 @@ class Pixel {
         if (d < this.size / 2) {
             if (!this.mouseIntersect) {
                 this.growSize += pixelSize * this.grow;
-                if (this.growSize === pixelSize * 5 || this.growSize === pixelSize) {
+                if (this.growSize === pixelSize * 10 || this.growSize === pixelSize) {
                     this.grow = this.grow * -1;
                 }
-                this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
+                this.susLength = map(this.growSize, pixelSize, pixelSize * 10, 0.1, 1);
                 synth1.set({
                     filterEnvelope: {
                         octaves: this.filterAmt,
@@ -56,10 +56,10 @@ class Pixel {
         if (d1 < this.size / 2) {
             if (!this.autoIntersect) {
                 this.growSize += pixelSize * this.grow;
-                if (this.growSize === pixelSize * 5 || this.growSize === pixelSize) {
+                if (this.growSize === pixelSize * 10 || this.growSize === pixelSize) {
                     this.grow = this.grow * -1;
                 }
-                this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
+                this.susLength = map(this.growSize, pixelSize, pixelSize * 10, 0.1, 1);
                 synth2.set({
                     filterEnvelope: {
                         octaves: this.filterAmt,
@@ -78,10 +78,10 @@ class Pixel {
         if (d2 < this.size / 2) {
             if (!this.autoIntersect2) {
                 this.growSize += pixelSize * this.grow;
-                if (this.growSize === pixelSize * 5 || this.growSize === pixelSize) {
+                if (this.growSize === pixelSize * 10 || this.growSize === pixelSize) {
                     this.grow = this.grow * -1;
                 }
-                this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
+                this.susLength = map(this.growSize, pixelSize, pixelSize * 10, 0.1, 1);
                 synth3.set({
                     filterEnvelope: {
                         octaves: this.filterAmt,

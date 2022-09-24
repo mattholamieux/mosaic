@@ -8,8 +8,8 @@ class Pixel {
         this.b = b;
         this.a = a;
         this.note = notes[floor(map(r, 0, 255, 0, notes.length - 1))];
-        this.modIndex = map(g, 255, 0, 4, 40);
-        this.harmonicity = harmonics[floor(map(b, 0, 255, 0, harmonics.length))];
+        this.filterAmt = floor(map(g, 0, 255, 1, 6));
+        this.filterEnv = map(b, 0, 255, 0.01, 0.5);
         this.susLength = 0.1;
         this.mouseIntersect = false;
         this.autoIntersect = false;
@@ -37,14 +37,14 @@ class Pixel {
                 }
                 this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
                 synth1.set({
-                    modulationIndex: this.modIndex,
-                    harmonicity: this.harmonicity,
-                    modulationEnvelope: {
-                        attack: this.modAttack
+                    filterEnvelope: {
+                        octaves: this.filterAmt,
+                        attack: this.filterEnv
                     }
                 });
                 synth1.triggerAttackRelease(this.note, this.susLength);
                 this.mouseIntersect = true;
+                console.log(this.filterEnv)
             }
         } else {
             this.mouseIntersect = false;
@@ -61,10 +61,9 @@ class Pixel {
                 }
                 this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
                 synth2.set({
-                    modulationIndex: this.modIndex,
-                    harmonicity: this.harmonicity,
-                    modulationEnvelope: {
-                        attack: this.modAttack
+                    filterEnvelope: {
+                        octaves: this.filterAmt,
+                        attack: this.filterEnv
                     }
                 });
                 synth2.triggerAttackRelease(this.note, this.susLength);
@@ -84,10 +83,9 @@ class Pixel {
                 }
                 this.susLength = map(this.growSize, pixelSize, pixelSize * 5, 0.1, 0.7);
                 synth3.set({
-                    modulationIndex: this.modIndex,
-                    harmonicity: this.harmonicity,
-                    modulationEnvelope: {
-                        attack: this.modAttack
+                    filterEnvelope: {
+                        octaves: this.filterAmt,
+                        attack: this.filterEnv
                     }
                 });
                 synth3.triggerAttackRelease(this.note, this.susLength);

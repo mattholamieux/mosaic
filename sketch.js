@@ -23,6 +23,7 @@ let pixelData = [];
 let pixelObjects = [];
 const notes = ['C2', 'D2', 'E2', 'G2', 'A2', 'C3', 'D3', 'E3', 'G3', 'A3', 'C4', 'D4', 'E4', 'G4', 'A4'];
 const harmonics = [2, 4, 6, 8, 12, 16, 24, 32];
+const oscillators = ["square", "sawtooth", "triangle"];
 let reverbAmt = 0.1;
 
 function preload() {

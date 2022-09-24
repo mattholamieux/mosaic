@@ -43,8 +43,8 @@ class Pixel {
                     }
                 });
                 synth1.triggerAttackRelease(this.note, this.susLength);
+                this.show();
                 this.mouseIntersect = true;
-                console.log(this.filterEnv)
             }
         } else {
             this.mouseIntersect = false;
@@ -67,6 +67,7 @@ class Pixel {
                     }
                 });
                 synth2.triggerAttackRelease(this.note, this.susLength);
+                this.show();
                 this.autoIntersect = true;
             }
         } else {
@@ -89,6 +90,7 @@ class Pixel {
                     }
                 });
                 synth3.triggerAttackRelease(this.note, this.susLength);
+                this.show();
                 this.autoIntersect2 = true;
             }
         } else {

@@ -71,7 +71,7 @@ const pan3 = new Tone.Panner(0.8);
 
 const reverb = new Tone.Reverb({
     decay: 3,
-    preDelay: 0.1,
+    preDelay: 0.3,
     wet: 0.1,
 })
 const gain = new Tone.Gain(0.7);

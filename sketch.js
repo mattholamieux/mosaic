@@ -57,7 +57,7 @@ function setup() {
 
 function draw() {
     for (const pixel of pixelObjects) {
-        pixel.show();
+        // pixel.show();
         pixel.mouseCross();
         pixel.autoCross();
         pixel.autoCross2();
@@ -136,6 +136,9 @@ async function initialize() {
     await Tone.start();
     console.log("audio context started");
     pixelate();
+    for (const pixel of pixelObjects) {
+        pixel.show();
+    }
     isInitialized = true;
     selectedTrack = 1;
 }

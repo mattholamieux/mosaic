@@ -57,7 +57,6 @@ function setup() {
 
 function draw() {
     for (const pixel of pixelObjects) {
-        // pixel.show();
         pixel.mouseCross();
         pixel.autoCross();
         pixel.autoCross2();

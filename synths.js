@@ -72,11 +72,16 @@ const pan3 = new Tone.Panner(0.8);
 const reverb = new Tone.Reverb({
     decay: 3,
     preDelay: 0.3,
-    wet: 0.1,
+    wet: 0.1
 })
+const delay = new Tone.PingPongDelay({
+    delayTime: "4n",
+    feedback: 0.3,
+    wet: 0
+});
 const gain = new Tone.Gain(0.7);
 
-synth1.chain(pan1, reverb, gain);
-synth2.chain(pan2, reverb, gain);
-synth3.chain(pan3, reverb, gain);
+synth1.chain(pan1, delay, reverb, gain);
+synth2.chain(pan2, delay, reverb, gain);
+synth3.chain(pan3, delay, reverb, gain);
 gain.toDestination();

@@ -25,6 +25,7 @@ const notes = ['C2', 'D2', 'E2', 'G2', 'A2', 'C3', 'D3', 'E3', 'G3', 'A3', 'C4',
 const harmonics = [2, 4, 6, 8, 12, 16, 24, 32];
 const oscillators = ["square", "sawtooth", "triangle"];
 let reverbAmt = 0.1;
+let delayAmt = 0;
 
 function preload() {
     myImage = loadImage("https://picsum.photos/1600");
@@ -33,7 +34,7 @@ function preload() {
 function setup() {
     const cnvSize = Math.floor(windowHeight / 40) * 40;
     console.log(cnvSize);
-    cnv = createCanvas(cnvSize, cnvSize);
+    cnv = createCanvas(cnvSize - pixelSize * 2, cnvSize - pixelSize * 2);
     cnv.mousePressed(startRecording);
     cnv.mouseReleased(stopRecording);
     cnv.mouseWheel(trackPad);
@@ -43,16 +44,7 @@ function setup() {
     rectMode(CENTER);
     stroke(180);
     // Draw instructions
-    background(200, 150);
-    let f = 0;
-    textSize(37);
-    textLeading(37);
-    textFont("serif");
-    for (i = 0; i < instructions.length; i++) {
-        fill(f);
-        text(instructions[i], 20, 37 * [i] + 37);
-        f += 15;
-    }
+    drawInstructions();
 }
 
 function draw() {
@@ -119,6 +111,7 @@ function keyPressed() {
         if (!isInitialized) {
             initialize();
         } else if (isLooping) {
+            // drawInstructions();
             noLoop();
             isLooping = false;
         } else {
@@ -140,6 +133,7 @@ async function initialize() {
     }
     isInitialized = true;
     selectedTrack = 1;
+    drawInstructions();
 }
 
 function startRecording() {
@@ -175,13 +169,30 @@ function trackPad(event) {
     if (event.wheelDeltaY > 10) {
         if (reverbAmt > 0.02) {
             reverbAmt -= 0.01;
+            delayAmt -= 0.01;
         }
         // if mousewheel or trackpad scrolls up, increase the reverb amount
     } else if (event.wheelDeltaY < -10) {
         if (reverbAmt < 0.9) {
             reverbAmt += 0.01;
+            delayAmt += 0.01;
         }
     }
     reverb.wet.value = reverbAmt;
-    console.log(reverbAmt);
+    delay.wet.value = delayAmt;
+}
+
+function drawInstructions() {
+    if (!isInitialized) {
+        background(200, 150);
+    }
+    let f = 0;
+    textSize(37);
+    textLeading(37);
+    textFont("serif");
+    for (i = 0; i < instructions.length; i++) {
+        fill(f);
+        text(instructions[i], 20, 37 * [i] + 37);
+        f += 15;
+    }
 }

@@ -32,6 +32,7 @@ function preload() {
 }
 
 function setup() {
+    frameRate(8);
     const cnvSize = Math.floor(windowHeight / 40) * 40;
     console.log(cnvSize);
     cnv = createCanvas(cnvSize - pixelSize * 2, cnvSize - pixelSize * 2);
@@ -168,13 +169,13 @@ function trackPad(event) {
     // if mousewheel or trackpad scrolls down, reduce the reverb amount
     if (event.wheelDeltaY > 10) {
         if (reverbAmt > 0.02) {
-            reverbAmt -= 0.01;
+            reverbAmt -= 0.005;
             delayAmt -= 0.01;
         }
         // if mousewheel or trackpad scrolls up, increase the reverb amount
     } else if (event.wheelDeltaY < -10) {
         if (reverbAmt < 0.9) {
-            reverbAmt += 0.01;
+            reverbAmt += 0.005;
             delayAmt += 0.01;
         }
     }
